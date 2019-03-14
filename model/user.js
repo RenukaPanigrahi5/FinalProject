@@ -14,36 +14,8 @@ const UserSchema = mongoose.Schema({
   }
 });
 
-// Info Schema
-const InfoSchema = mongoose.Schema({
-  username: {
-    type: String,
-    required: true
-  },
-  firstname: {
-    type: String,
-    required: true
-  },
-  lastname: {
-    type: String,
-    required: true
-  },
-  email: {
-    type: String,
-    required: true
-  },
-  phone: {
-    type: String,
-    required: true
-  },
-  address: {
-    type: String,
-    required: true
-  }
-});
-
 const User = module.exports = mongoose.model('User', UserSchema);
-const Info = module.exports = mongoose.model('CustInfo', InfoSchema);
+//const Info = module.exports = mongoose.model('CustInfo', InfoSchema);
 
 module.exports.getUserById = function(id, callback){
   User.findById(id, callback);
@@ -57,11 +29,6 @@ module.exports.getUserByName = function(username, callback){
 module.exports.getUserByUsername = function(username, callback){
   const query = {username: username}
   User.findOne(query, callback);
-}
-
-module.exports.getInfoByName = function(username, callback){
-  const query = {username: username}
-  Info.findOne(query, callback);
 }
 
 module.exports.addUser = function(newUser, callback){
