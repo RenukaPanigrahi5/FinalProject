@@ -8,8 +8,6 @@ const User = require('../model/user');
 // Register
 router.post('/register', (req, res, next) => {
   let newUser = new User({
-    name: req.body.name,
-    email: req.body.email,
     username: req.body.username,
     password: req.body.password
   });
@@ -19,6 +17,20 @@ router.post('/register', (req, res, next) => {
       res.json({success: false, msg:'Failed to register user'});
     } else {
       res.json({success: true, msg:'User registered'});
+    }
+  });
+});
+
+//get UserDetailsByUserName
+router.post('/getUserDetailsByName', (req, res, next) => {
+  const username = req.body.username;
+  User.getUserByName(username, (err, user) => {
+    if(err) throw err;
+    if(!user){
+      return res.json({success: false, msg: 'User not found'});
+    }
+    else{
+      return res.json({success: true, user: {name: username} });
     }
   });
 });
