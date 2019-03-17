@@ -1,15 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
-const jwt = require('jsonwebtoken');
-const config = require('../config/database');
-const User = require('../model/user');
+//Register
 
-// Register
 router.post('/register', userController.addNewUser);
 router.get('/checkUserExistsAlready', userController.isUserExists);
 router.post('/authenticate', userController.authenticateUser);
-router.post('/displayUsers', userController.listUsers);
-  
+router.get('/displayAllUsers', userController.listAllUser);
 
 module.exports = router;

@@ -21,7 +21,7 @@ mongoose.connection.on('error', (err) => {
 
 const app = express();
 
-//const users = require('./api/routes/usersRoutes');
+const users = require('./api/routes/usersRoutes');
 //const dietSheet = require('./api/routes/dietSheetRoutes');
 //const workout = require('./api/routes/workoutsRoutes');
 //const trainer = require('./api/routes/trainerRoutes');
@@ -46,7 +46,7 @@ app.use(passport.session());
 
 require('./api/config/passport')(passport);
 
-//app.use('/fitnessapp/users', users);
+app.use('/fitnessapp/users', users);
 //app.use('/fitnessapp/dietSheet', dietSheet);
 //app.use('/fitnessapp/workout', workout);
 //app.use('/fitnessapp/trainer', trainer);
