@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
-const config = require('./config/database');
+const config = require('./api/config/database');
 
 // Connect To Database
 mongoose.connect(config.database);
@@ -21,7 +21,12 @@ mongoose.connection.on('error', (err) => {
 
 const app = express();
 
-const users = require('./routes/users');
+//const users = require('./api/routes/usersRoutes');
+//const dietSheet = require('./api/routes/dietSheetRoutes');
+//const workout = require('./api/routes/workoutsRoutes');
+//const trainer = require('./api/routes/trainerRoutes');
+
+
 
 // Port Number
 const port = 8082;
@@ -39,13 +44,16 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./config/passport')(passport);
+require('./api/config/passport')(passport);
 
-app.use('/users', users);
+//app.use('/fitnessapp/users', users);
+//app.use('/fitnessapp/dietSheet', dietSheet);
+//app.use('/fitnessapp/workout', workout);
+//app.use('/fitnessapp/trainer', trainer);
 
 // Index Route
-app.get('/', (req, res) => {
-  res.send('Invalid Endpoint');
+app.get('/fitnessapp', (req, res) => {
+  res.send('Fitness APP is up and running : User correct endpoitn');
 });
 
 // Start Server
