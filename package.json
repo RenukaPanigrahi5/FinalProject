@@ -1,7 +1,7 @@
 {
-  "name": "meanauthapp",
+  "name": "fitnessapp",
   "version": "1.0.0",
-  "description": "MEAN stack authentication app",
+  "description": "Fitness app",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -17,6 +17,6 @@
     "passport": "*",
     "passport-jwt": "*"
   },
-  "author": "Brad Traversy",
+  "author": "Renuka panigrahi",
   "license": "ISC"
 }

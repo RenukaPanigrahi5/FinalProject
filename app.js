@@ -1,30 +1,34 @@
 const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const passport = require('passport');
-const mongoose = require('mongoose');
-const config = require('./api/config/database');
+path = require('path');
+bodyParser = require('body-parser');
+cors = require('cors');
+passport = require('passport');
+mongoose = require('mongoose');
+config = require('./api/config/database');
+
+//userFindAndModify is default while doing
+//findOneAndUpdate need to make false
+mongoose.set('useFindAndModify', false);
 
 // Connect To Database
 mongoose.connect(config.database);
 
 // On Connection
 mongoose.connection.on('connected', () => {
-  console.log('Connected to database '+config.database);
+  console.log('Connected to database ' + config.database);
 });
 
 // On Error
 mongoose.connection.on('error', (err) => {
-  console.log('Database error: '+err);
+  console.log('Database error: ' + err);
 });
 
 const app = express();
 
 const users = require('./api/routes/usersRoutes');
-//const dietSheet = require('./api/routes/dietSheetRoutes');
-//const workout = require('./api/routes/workoutsRoutes');
-//const trainer = require('./api/routes/trainerRoutes');
+ dietSheet = require('./api/routes/dietSheetRoutes');
+ workout = require('./api/routes/workoutsRoutes');
+ trainer = require('./api/routes/trainerRoutes');
 
 
 
@@ -47,9 +51,9 @@ app.use(passport.session());
 require('./api/config/passport')(passport);
 
 app.use('/fitnessapp/users', users);
-//app.use('/fitnessapp/dietSheet', dietSheet);
-//app.use('/fitnessapp/workout', workout);
-//app.use('/fitnessapp/trainer', trainer);
+app.use('/fitnessapp/dietSheet', dietSheet);
+app.use('/fitnessapp/workout', workout);
+app.use('/fitnessapp/trainer', trainer);
 
 // Index Route
 app.get('/fitnessapp', (req, res) => {
@@ -58,5 +62,5 @@ app.get('/fitnessapp', (req, res) => {
 
 // Start Server
 app.listen(port, () => {
-  console.log('Server started on port '+port);
+  console.log('Server started on port ' + port);
 });
