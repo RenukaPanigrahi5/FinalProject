@@ -26,7 +26,7 @@ exports.listAllUserAndTrainer = function (req, res) {
 
 exports.updateTrainerOfUser = function (req, res) {
     let newUserAndTrainer = new UserAndTrainer(req.body);
-    UserAndTrainer.updateTrainerDetails(newUserAndTrainer, (err, trainer) => {
+    UserAndTrainer.updateUserTrainerDetails(newUserAndTrainer, (err, trainer) => {
         if (err) {
             res.json({success: false, msg: 'Failed to update trainer of user' +err });
         } else {
@@ -36,7 +36,7 @@ exports.updateTrainerOfUser = function (req, res) {
 };
 
 
-exports.removeUserforTrainer = function (req, res) {
+exports.removeUserForTrainer = function (req, res) {
     
     UserAndTrainer.removeUserAndTrainer(req.body.username, (err, trainer) => {
         if (err) {

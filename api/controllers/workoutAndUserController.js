@@ -19,8 +19,8 @@ exports.getWorkoutCategoryOfUser = function (req, res) {
 };
 
 exports.addWorkoutCategoryToUser = function (req, res) {
-    let newWorkoutAndUser = new WorkAndUser(req.body);
-    WorkAndUser.addWorkoutCategoryToUser(newWorkoutAndUser, (err, newWorkoutAndUser) => {
+    let newWorkoutAndUser = new WorkoutAndUser(req.body);
+    WorkoutAndUser.addWorkoutCategoryToUser(newWorkoutAndUser, (err, newWorkoutAndUser) => {
         if (err) {
             res.json({ success: false, msg: 'Failed to addWorkoutCategory ToUser'});
         } else {

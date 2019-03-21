@@ -19,13 +19,13 @@ router.get('/TrainerDetailsByName', TrainerController.getTrainerDetailsByName);
 //list all trainers for the users
 router.get('/listAllTrainers', TrainerController.listAllTrainers);
 //update the trainer for the user if he/she wants to change
-router.get('/updateTrainerOfUser', UserAndTrainerController.updateTrainerOfUser);
+router.put('/updateTrainerOfUser', UserAndTrainerController.updateTrainerOfUser);
 //assign the trainer to user
 router.post('/assignTrainerToUser', UserAndTrainerController.assignTrainerToUser);
 //update the user for the trainer
 router.get('/displayAllTheTrainerAndUsers', UserAndTrainerController.listAllUserAndTrainer);
 
-router.delete('removeUserForTrainer', UserAndTrainerController.removeUserforTrainer);
+router.delete('/removeUserForTrainer', UserAndTrainerController.removeUserForTrainer);
 
 
 
