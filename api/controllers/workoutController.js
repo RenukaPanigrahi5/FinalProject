@@ -4,7 +4,7 @@ function isEmptyObject(obj) {
 }
 exports.getWorkoutByCategory = function (req, res) {
     const workoutCategory= req.body.workoutCategory;
-    Workout.getWorkoutByCategory(workoutCategory, (err, workouts) => {
+    Workout.getWorkoutCategory(workoutCategory, (err, workouts) => {
         if (err) throw err;
         if (isEmptyObject(workouts)) {
             return res.json({ success: true, msg: 'DietSheet not found for the dietcategory'});
@@ -28,7 +28,7 @@ exports.addNewWorkout = function (req, res) {
         });
     } else {
         let newWorkout = new Workout(req.body);
-        Workout,addNewWorkout(newWorkout, (err, user) => {
+        Workout.addNewWorkout(newWorkout, (err, user) => {
             if(err){
                 res.json({success: false, msg: 'Failed to add new workout'});
             } else{
