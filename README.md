@@ -46,6 +46,7 @@ Runs on port 8082
 User Schema
 
 http://localhost:8082/fitnessapp/users/register [POST]
+
 http://localhost:8082/fitnessapp/users/authenticate[POST]
 http://localhost:8082/fitnessapp/users/checkUserExistsAlready [GET]
 http://localhost:8082/fitnessapp/users/displayAllUsers  [GET]
