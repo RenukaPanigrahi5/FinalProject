@@ -27,6 +27,7 @@ The history of diet and exercises of an person.
 Sharing with friends :
 User can share their log with friends.
 
+
 #Project SetUp
 This Fitness App uses Express.js and MongoDb 
 To start the MongoDb 
@@ -34,6 +35,7 @@ To start the MongoDb
 Start the server
 npm run start 
 Runs on port 8082
+
 #Rest API
 User Schema
 http://localhost:8082/fitnessapp/users/register [POST]
