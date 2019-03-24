@@ -28,18 +28,23 @@ Sharing with friends :
 User can share their log with friends.
 
 
-#Project SetUp
+#ProjectSetUp
 
-This Fitness App uses Express.js and MongoDb 
-To start the MongoDb 
+This Fitness App uses Express.js and MongoDb
+
+To start the MongoDb
+
 ./mongo
 Start the server
-npm run start 
+
+npm run start
+
 Runs on port 8082
 
-#Rest API
+#RestAPI
 
 User Schema
+
 http://localhost:8082/fitnessapp/users/register [POST]
 http://localhost:8082/fitnessapp/users/authenticate[POST]
 http://localhost:8082/fitnessapp/users/checkUserExistsAlready [GET]
