@@ -30,11 +30,12 @@ User can share their log with friends.
 
 #ProjectSetUp
 
-This Fitness App uses Express.js and MongoDb
+This Fitness App uses Nodejs, Express.js, Passport jwt for authentication and MongoDb
 
 To start the MongoDb
 
 ./mongo
+
 Start the server
 
 npm run start
