@@ -49,6 +49,7 @@ http://localhost:8082/fitnessapp/users/register [POST]
 http://localhost:8082/fitnessapp/users/authenticate[POST]
 http://localhost:8082/fitnessapp/users/checkUserExistsAlready [GET]
 http://localhost:8082/fitnessapp/users/displayAllUsers  [GET]
+
 http://localhost:8082/fitnessapp/users/deleteUsers [DELETE]
 
 Workout Schema
@@ -68,6 +69,7 @@ http://localhost:8082/fitnessapp/trainer/addNewTrainer [POST]
 http://localhost:8082/fitnessapp/trainer/checkTrainerNameExistsAlready [GET]
 http://localhost:8082/fitnessapp/trainer/removeTrainerByName [DELETE]
 http://localhost:8082/fitnessapp/trainer/listAllTrainers[GET]
+
 http://localhost:8082/fitnessapp/trainer/updateTrainerDetails [PUT]
 
 
