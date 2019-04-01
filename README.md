@@ -28,7 +28,7 @@ Sharing with friends :
 User can share their log with friends.
 
 
-#ProjectSetUp
+## ProjectSetUp
 
 This Fitness App uses Nodejs, Express.js, Passport jwt for authentication and MongoDb
 
@@ -42,7 +42,7 @@ npm run start
 
 Runs on port 8082
 
-#RestAPI
+## RestAPI
 
 User Schema
 
