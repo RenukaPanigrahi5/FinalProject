@@ -73,3 +73,8 @@ module.exports.getAllUsers = function (callback) {
 module.exports.removeUserDetails = function (username, callback) {
   User.findOneAndRemove({ username: username }, callback);
 }
+
+module.exports.getUserByEmail = function (email, callback) {
+  const query = {email: email}
+  User.findOne(query, callback);
+}

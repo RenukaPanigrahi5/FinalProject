@@ -2,6 +2,7 @@ const User = require('../model/userModel');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
+const _= require('lodash');
 
 function isEmptyObject(obj) {
     return !Object.keys(obj).length;
@@ -28,10 +29,11 @@ exports.isUserExists = function (req, res) {
     });
 };
 exports.authenticateUser = function (req, res) {
+    const email = req.body.email;
     const username = req.body.username;
     const password = req.body.password;
 
-    User.getUserByUsername(username, (err, user) => {
+    User.getUserByEmail(email, (err, user) => {
         if (err) throw err;
         if (!user) {
             return res.json({ success: false, msg: 'User not found' });
@@ -43,9 +45,9 @@ exports.authenticateUser = function (req, res) {
                 const token = jwt.sign({ data: user }, config.secret, {
                     expiresIn: 604800 //1week
                 });
-                res.json({ success: true, msg: 'valid User' });
+                return res.status(200).json({"token": token});
             } else {
-                return res.json({ success: false, msg: 'Wrong Password' });
+                return res.json(404).json(info);
             }
 
         });
@@ -79,4 +81,18 @@ exports.removeUserDetails = function (req, res) {
             });
         }
     });
+};
+
+exports.getUserProfileByUsername = function (req, res) {
+    const email = "re@gmail.com";
+   console.log("getUserProfileByUsername() email--"+ email);
+   User.getUserByEmail(email,(err, user) => {
+       console.log("getUserProfileByUsername() user--"+ user);
+       if(err) throw err;
+       if(!user)
+       return res.status(404).json({status: false, message: "User record not found"});
+       else
+       return res.status(200).json({status: true, user:_.pick(user,['fullName', 'email', 'username', 'height', 'weight', 'gender', 'address'])});
+   });
+
 };

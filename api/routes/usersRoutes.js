@@ -11,5 +11,6 @@ router.post('/authenticate', userController.authenticateUser);
 router.get('/displayAllUsers', userController.listAllUsers);
 //admin user can delete the user if one terminates
 router.delete('/deleteUsers', userController.removeUserDetails);
+router.get('/userProfile', userController.getUserProfileByUsername);
 
 module.exports = router;
