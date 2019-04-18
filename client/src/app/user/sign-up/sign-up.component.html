@@ -29,16 +29,97 @@
   <div *ngIf="signUpForm.submitted && !height.valid">
     <label class="validation-message">This field is required.</label>
   </div>
-  <input type="text" #gender="ngModel" [(ngModel)]="userService.selectedUser.gender" name="gender" placeholder="Gender"
-  required  [ngClass]="{'invalid-textbox' :signUpForm.submitted && !gender.valid }">
+
+  <!-- <input type="text" #gender="ngModel" [(ngModel)]="userService.selectedUser.gender" name="gender" placeholder="Gender"
+  required  [ngClass]="{'invalid-textbox' :signUpForm.submitted && !height.valid }">
   <div *ngIf="signUpForm.submitted && !gender.valid">
     <label class="validation-message">This field is required.</label>
+    <label for="listOptions"></label>
+    <select [(ngModel)]=model.listOptions [compareWith]="compareByOptionId">
+      <option *ngFor="let oneOption of gender" [ngValue]="oneOption">{{oneOption.name}}</option>
+    </select>
+  </div> -->
+
+  <!-- <div class="form-group"
+  <select id="" #gender="ngModel" [(ngModel)]="userService.selectedUser.gender" name="gender" placeholder="Gender" class="form-control"
+    required>
+    <option *ngFor="let gen of gender" [value]="gen.id">
+      </option>
+      </select>
+      </div>
+  <div *ngIf="signUpForm.submitted && !gender.valid">
+    <label class="validation-message">This field is required.</label>
+  </div> -->
+
+  <!-- <mat-form-field>
+    <mat-select placeholder="Gender" [(ngModel)]="userService.selectedUser.weight" name="weight" required>
+      <mat-option *ngFor="let gendervalues of gvalues" [value]="gendervalues">
+        {{gendervalues.name}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="genderControl.hasError('required')">Please choose gender</mat-error>
+    
+  </mat-form-field> -->
+  
+
+  
+  <!-- <div class="form-group">
+    <label for="gender">
+      Gender
+    </label>
+    <select id="gender" name="gender"
+    [(ngModel)]="gender" class="form-control">
+    <option *ngFor="let gen of gender" [value]="gen.id">
+      {{gen.name}}
+  </select>
+   <div *ngIf="signUpForm.submitted && !address.valid">
+      <label class="validation-message">This field is required.</label>
+    </div> 
+  </div> -->
+  
+  
+  <!-- <input type="drop-down" #gender="ngModel" [(ngModel)]="userService.selectedUser.gender" name="gender" placeholder="Gender"
+  required  [ngClass]="{'invalid-textbox' :signUpForm.submitted && !gender.valid }">
+        <option value="gender">Male</option> -->
+        <!-- <option value="gender">Female</option> -->
+      
+    
+        <div class="container">
+          <!-- Content here -->
+          <ul class="nav nav-pills">
+              <li class="nav-item">
+                  <a class="nav-link active" href="#">Active</a>
+              </li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                  <div class="dropdown-menu">
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Separated link</a>
+                  </div>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link disabled" href="#">Disabled</a>
+              </li>
+          </ul>
+      </div
+ 
+ <div *ngIf="signUpForm.submitted && !gender.valid">
+    <label class="validation-message">This field is required.</label>
   </div>
+
+ 
   <input type="text" #weight="ngModel" [(ngModel)]="userService.selectedUser.weight" name="weight" placeholder="Weight"
   required  [ngClass]="{'invalid-textbox' :signUpForm.submitted && !weight.valid }">
   <div *ngIf="signUpForm.submitted && !weight.valid">
     <label class="validation-message">This field is required.</label>
   </div>
+
   <input type="text" #address="ngModel" [(ngModel)]="userService.selectedUser.address" name="address" placeholder="Adress"
   required  [ngClass]="{'invalid-textbox' :signUpForm.submitted && !address.valid }">
   <div *ngIf="signUpForm.submitted && !address.valid">

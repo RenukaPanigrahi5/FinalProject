@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm,FormControl, Validators } from '@angular/forms';
 
 import { UserService } from '../../shared/user.service'
-
+export interface Gender {
+  id: number;
+  name: string;
+}
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -51,5 +54,11 @@ export class SignUpComponent implements OnInit {
     form.resetForm();
     this.serverErrorMessages = '';
   }
+
+   gender =[
+     {id:1, name: 'Male'},
+     {id:2, name:'Female'}
+   ];
+  
 
 }
