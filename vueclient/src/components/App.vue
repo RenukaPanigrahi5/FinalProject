@@ -24,9 +24,6 @@
         </div>
     </nav>
     
-       
-  
-  
 </template>
 
 <script>
