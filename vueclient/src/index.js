@@ -1,19 +1,42 @@
-import Vue from 'vue';
-import VeeValidate from 'vee-validate';
 
-import { store } from './_store';
-import { router } from './_helpers';
-import App from './app/App';
+import Vue from 'vue'
+import App from './components/App.vue'
+import Home from './components/Home.vue'
+//import SecretQuote from './components/SecretQuote.vue'
+import UserProfile from './components/UserProfile.vue'
+import Signup from './components/Signup.vue'
+import Login from './components/Login.vue'
+import VueRouter from 'vue-router'
+import VueResource from 'vue-resource'
+Vue.use(VueResource)
+Vue.use(VueRouter)
+import auth from './auth'
+import './assets/main.scss'
 
-Vue.use(VeeValidate);
+Vue.http.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('id_token');
 
-// setup fake backend
-//import { configureFakeBackend } from './_helpers';
-//configureFakeBackend();
+// Check the user's auth status when the app starts
+auth.checkAuth()
 
-new Vue({
-    el: '#app',
-    router,
-    store,
-    render: h => h(App)
-});
+export var router = new VueRouter()
+
+router.map({
+  '/home': {
+    component: Home
+  },  
+  'userProfile': {
+    component: UserProfile
+  },
+  '/login': {
+    component: Login
+  },
+  '/signup': {
+    component: Signup
+  }
+})
+
+router.redirect({
+  '*': '/home'
+})
+
+router.start(App, '#app')

@@ -5,6 +5,7 @@ cors = require('cors');
 passport = require('passport');
 mongoose = require('mongoose');
 config = require('./api/config/database');
+errorhandler    = require('errorhandler');
 
 //userFindAndModify is default while doing
 //findOneAndUpdate need to make false
@@ -41,13 +42,21 @@ app.use(cors());
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(function(err, req, res, next) {
+  if (err.name === 'StatusError') {
+    res.send(err.status, err.message);
+  } else {
+    next(err);
+  }
+});
+
 // Body Parser Middleware
 app.use(bodyParser.json());
 
 // Passport Middleware
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(errorhandler());
 require('./api/config/passport')(passport);
 
 app.use('/fitnessapp/users', users);

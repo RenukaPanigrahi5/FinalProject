@@ -1,35 +1,31 @@
-var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-
 module.exports = {
-    mode: 'development',
-    resolve: {
-        extensions: ['.js', '.vue']
-    },
-    module: {
-        rules: [
-            {
-                test: /\.vue?$/,
-                exclude: /(node_modules)/,
-                use: 'vue-loader'
-            },
-            {
-                test: /\.js?$/,
-                exclude: /(node_modules)/,
-                use: 'babel-loader'
-            }
-        ]
-    },
-    plugins: [new HtmlWebpackPlugin({
-        template: './src/index.html'
-    })],
-    devServer: {
-        historyApiFallback: true
-    },
-    externals: {
-        // global app config object
-        config: JSON.stringify({
-            apiUrl: 'http://localhost:8082/fitnessapp'
-        })
-    }
+  // the main entry of our app
+  entry: ['./src/index.js', './src/auth/index.js'],
+  // output configuration
+  output: {
+    path: __dirname + '/build/',
+    publicPath: 'build/',
+    filename: 'build.js'
+  },
+  // how modules should be transformed
+  module: {
+    loaders: [
+      // process *.vue files using vue-loader
+      { test: /\.vue$/, loader: 'vue' },
+      {
+        test: /\.s[a|c]ss$/,
+        loader: 'style!css!sass'
+      },
+      // process *.js files using babel-loader
+      // the exclude pattern is important so that we don't
+      // apply babel transform to all the dependencies!
+      { test: /\.js$/, loader: 'babel', exclude: /node_modules/ }
+    ]
+  },
+  // configure babel-loader.
+  // this also applies to the JavaScript inside *.vue files
+  babel: {
+    presets: ['es2015'],
+    plugins: ['transform-runtime']
+  }
 }

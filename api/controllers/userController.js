@@ -2,52 +2,57 @@ const User = require('../model/userModel');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
-const _= require('lodash');
+const _ = require('lodash');
 
 function isEmptyObject(obj) {
     return !Object.keys(obj).length;
 }
 
 exports.addNewUser = function (req, res) {
+    const email = req.body.email;   
     let newUser = new User(req.body);
     User.addUser(newUser, (err, user) => {
-        if (err) {
+        if (err) {            
             res.json({ success: false, msg: 'Failed to register user' });
-        } else {
-            res.json({ json: true, msg: 'User registered successfully' });
+        } else {           
+            res.status(201).send({ id_token: createToken(email) });
         }
     });
 };
 
 exports.isUserExists = function (req, res) {
-    const username = req.body.username;
-    User.getUserByUsername(username, (err, user) => {
+    const email = req.body.email;
+    User.getUserByEmail(username, (err, user) => {
         if (err) throw err;
-        if (user) {
-            return res.json({ success: true, msg: 'User exists already with username=' + username });
+        if (user) {            
+            res.status(200).send(" User exists already with "+ email);
         }
     });
 };
 exports.authenticateUser = function (req, res) {
     const email = req.body.email;
-    const username = req.body.username;
     const password = req.body.password;
-
+    console.log("email "+ email);
     User.getUserByEmail(email, (err, user) => {
         if (err) throw err;
         if (!user) {
             return res.json({ success: false, msg: 'User not found' });
-
+            console.log("User Not Found");
         }
         User.comparePassword(password, user.password, (err, isMatch) => {
             if (err) throw err;
             if (isMatch) {
-                const token = jwt.sign({ data: user }, config.secret, {
-                    expiresIn: 604800 //1week
-                });
-                return res.status(200).json({"token": token});
+                console.log("Password matched");
+
+                //const token = jwt.sign(_.omit(user.email, 'password'), config.secret, { expiresInMinutes: 60*5 });
+                //const token = jwt.sign({ data: user }, config.secret, { expiresIn: 604800 });
+                //console.log("User Found returnig the token -- "+ token);
+                //return res.status(200).json({"token": token});
+                //res.status(201).send({ id_token: token});
+                res.status(201).send({ id_token: createToken(email) });
             } else {
-                return res.json(404).json(info);
+                console.log("Password not matched");
+                return res.json(404).json("password not matching");
             }
 
         });
@@ -96,3 +101,7 @@ exports.getUserProfileByUsername = function (req, res) {
    });
 
 };
+
+function createToken(user) {
+    return jwt.sign(_.omit(user, 'password'), config.secret, { expiresInMinutes: 60*5 });
+  }
