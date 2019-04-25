@@ -1,20 +1,45 @@
 <template>
-  <div class="col-sm-4 col-sm-offset-4">
-    <h2>Log In</h2>
-    <p>Log in to your account to get some great quotes.</p>
-    <div class="alert alert-danger" v-if="error">
-      <p>{{ error }}</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mt-5 mx-auto">
+                <form v-on:submit.prevent="login">
+                    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" v-model="email" class="form-control" name="email" placeholder="Enter Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" v-model="password" class="form-control" name="password" placeholder="Enter Password">
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-      <input  type="text"  class="form-control" placeholder="Enter your email" v-model="credentials.email">
-    </div>
-    <div class="form-group">
-      <input type="password" class="form-control"  placeholder="Enter your password" v-model="credentials.password">
-    </div>
-    <button class="btn btn-primary" @click="submit()">Login</button>
-  </div>
 </template>
 
 <script>
+import axios from 'axios'
+import router from '../router'
+import EventBus from './EventBus'
 
+export default {
+  data () {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+
+  methods: {
+    login () {
+      
+        router.push({ name: 'Profile' })
+      },
+    emitMethod () {
+      EventBus.$emit('logged-in', 'loggedin')
+    }
+  }
+}
 </script>

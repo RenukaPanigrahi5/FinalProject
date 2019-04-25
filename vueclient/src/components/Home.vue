@@ -1,5 +1,7 @@
 <template>
-  <div class="col-sm-6 col-sm-offset-3">
-    <h1>Welcome to FitnessApp</h1>    
-  </div>
+   <div class="container">
+       <div class="jumbotron">
+           <h1 class="text center">Welcome to fitness application</h1>
+       </div>
+       </div> 
 </template>
