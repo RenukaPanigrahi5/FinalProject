@@ -15,7 +15,7 @@ exports.addNewUser = function (req, res) {
     User.addUser(newUser, (err, user) => {
         if (err) {   
             console.log("addNewUser"+ email);
-            res.json({ success: false, msg: 'Failed to register user' });
+            res.json({ success: false, msg: 'Failed to register user', error:err });
         } else {      
             console.log("addNewUser else "+ email);     
             return res.status(201).send({ id_token: createToken(email) });
@@ -26,8 +26,10 @@ exports.addNewUser = function (req, res) {
 exports.isUserExists = function (req, res) {
     const email = req.body.email;
     User.getUserByEmail(username, (err, user) => {
-        if (err) throw err;
-        if (user) {            
+        if (err) {
+
+        }else if (user) {
+
             res.status(200).send(" User exists already with "+ email);
         }
     });
@@ -43,16 +45,20 @@ exports.authenticateUser = function (req, res) {
             return res.json({ success: false, msg: 'User not found' });            
         }
         User.comparePassword(password, user.password, (err, isMatch) => {
-            if (err) throw err;
+            if (err) {
+                return res.json({ success: false, error: err });     
+            }
             if (isMatch) {
                 console.log("Password matched"+ email)
                 res.status(201).send({ 
+                                        success: true,
                                         id_token: createToken(email),
-                                        user:_.pick(user,['fullName', 'email', 'username', 'height', 'weight', 'gender', 'address'])}
+                                        user:_.pick(user,['fullName', 'email', 'username', 'height', 'weight','age', 
+                                                            'gender', 'address'])}
                                     );
             } else {
                 console.log("Password not matched");
-                return res.json(404).json("password not matching");
+                res.json({ success: false, msg: 'Wrong Password' });    
             }
 
         });
@@ -88,17 +94,19 @@ exports.removeUserDetails = function (req, res) {
     });
 };
 
-exports.getUserProfileByUsername = function (req, res) {
+exports.getUserProfileByEmail = function (req, res) {
     const email = req.query.email;
     
     console.log("email-- "+ email);
     User.getUserByEmail(email,(err, user) => {
-       console.log("getUserProfileByUsername() user--"+ user);
-       if(err) throw err;
-       if(!user)
-       return res.status(404).json({status: false, message: "User record not found"});
-       else
-       return res.status(200).json({status: true, user:_.pick(user,['fullName', 'email', 'username', 'height', 'weight', 'gender', 'address'])});
+       console.log("getUserProfileByEmail user--"+ user);
+       if(err) {
+            return res.status(404).json({success: false, message: " Could not get the User Profile ", error: err});
+       } else if(!user) {
+            return res.status(404).json({success: false, message: "User record not found"});
+       } else {
+            return res.status(200).json({success: true, user:_.pick(user,['_id','fullName', 'email', 'username', 'height', 'weight','age', 'gender', 'address'])});
+       }   
     });
 
 };
@@ -107,4 +115,29 @@ function createToken(user) {
     const token = jwt.sign(_.omit(user, 'password'), config.secret, { expiresInMinutes: 60*5 });
     console.log("token in the server for user "+ token);
     return token;
-  }
+}
+
+exports.changePassword = function (req, res) {
+    const email = req.body.email;
+    const password = req.body.password;
+    const confirmPassword = req.body.confirmPassword;
+    console.log("email"+ email +"   password      "+ password + "    confirmPassword   ");    
+    if(password == confirmPassword){       
+        User.getUserByEmail(email, (err, existingUser) => {
+            if (err) {
+                res.json({ success: false, msg: 'Failed to  update password', error: err });
+            } else if(existingUser) {
+                existingUser.password = confirmPassword;
+                User.changePassword(existingUser, (err, updatedUser) => {
+                    if (err) {
+                        res.json({ success: false, msg: 'Failed to  update password', error: err });
+                    } else if(updatedUser) {                        
+                        res.json({ success: true,  msg: 'Password changed successfully', updatedUser: updatedUser });
+                    }
+                });               
+            }
+        });
+    }else{
+        res.json({ success: false, msg: 'Password Mismatched'});
+    }    
+};
