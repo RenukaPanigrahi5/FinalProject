@@ -14,3 +14,10 @@ export default {
   }
 }
 </script>
+<style>
+.fitnessDiv {
+            background-color: #c6b9e9;
+            border: 0in;            
+}
+</style>
+

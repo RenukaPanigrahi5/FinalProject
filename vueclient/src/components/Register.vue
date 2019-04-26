@@ -4,21 +4,45 @@
       <div class="col-md-6 mt-5 mx-auto">
         <form v-on:submit.prevent="register">
           <h1 class="h3 mb-3 font-weight-normal">Register</h1>
-          <div class="form-group">
-            <label for="first_name">First Name</label>
-            <input type="text" v-model="first_name" class="form-control" name="first_name" placeholder="Enter Fist Name">
+          <div class="form-group">            
+            <input type="text" v-model="user.fullName" v-validate="'required'" class="form-control" name="fullName" placeholder="Enter Full Name" :class="{ 'is-invalid': submitted && errors.has('fullName') }">
+            <div v-if="submitted && errors.has('fullName')" class="invalid-feedback">{{ errors.first('fullName') }}</div>
           </div>
           <div class="form-group">
-            <label for="last_name">Last Name</label>
-            <input type="text" v-model="last_name" class="form-control" name="last_name" placeholder="Enter Last Name">
+            <input type="text" v-model="user.username" v-validate="'required'" class="form-control" name="username" placeholder="Enter User Name" :class="{ 'is-invalid': submitted && errors.has('username') }">
+            <div v-if="submitted && errors.has('username')" class="invalid-feedback">{{ errors.first('username') }}</div>
+          </div>          
+          <div class="form-group">
+            <input type="password" v-model="user.password" v-validate="'required'" class="form-control" name="password" placeholder="Enter Password" :class="{ 'is-invalid': submitted && errors.has('password') }">
+            <div v-if="submitted && errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}</div>
           </div>
           <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" v-model="email" class="form-control" name="email" placeholder="Enter Email">
+            <input type="email" v-model="user.email" v-validate="'required'" class="form-control" name="email" placeholder="Enter Email" :class="{ 'is-invalid': submitted && errors.has('email') }">
+            <div v-if="submitted && errors.has('email')" class="invalid-feedback">{{ errors.first('email') }}</div>
+          </div>
+           <div class="form-group">
+            <input type="number" v-model="user.height" v-validate="'required'" class="form-control" name="height" placeholder="Enter Height" :class="{ 'is-invalid': submitted && errors.has('height') }">
+            <div v-if="submitted && errors.has('height')" class="invalid-feedback">{{ errors.first('height') }}</div>
           </div>
           <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" v-model="password" class="form-control" name="password" placeholder="Enter Password">
+            <input type="number" v-model="user.weight" v-validate="'required'" class="form-control" name="weight" placeholder="Enter Weight" :class="{ 'is-invalid': submitted && errors.has('weight') }">
+            <div v-if="submitted && errors.has('weight')" class="invalid-feedback">{{ errors.first('weight') }}</div>
+          </div>
+          <div class="form-group">
+            <input type="text" v-model="user.age" v-validate="'between:20,60'"  class="form-control" name="age" placeholder="Enter Age Between 20 to 60 years" :class="{ 'is-invalid': submitted && errors.has('age') }">
+            <div v-if="submitted && errors.has('age')" class="invalid-feedback">{{ errors.first('age') }}</div>
+          </div>
+           <div class="form-group">
+             <select name="gender" id="gender"  v-validate="'required'" v-model="user.gender" placeholder="Enter Gender" class="form-control" :class="{ 'is-invalid': submitted && errors.has('gender') }">               
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Others">Others</option>
+            </select>           
+            <div v-if="submitted && errors.has('gender')" class="invalid-feedback">{{ errors.first('gender') }}</div>
+          </div>
+           <div class="form-group">
+            <input type="text" v-model="user.address" v-validate="'required'" class="form-control" name="address" placeholder="Enter Address" :class="{ 'is-invalid': submitted && errors.has('address') }">
+            <div v-if="submitted && errors.has('address')" class="invalid-feedback">{{ errors.first('address') }}</div>
           </div>
           <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
         </form>
@@ -34,25 +58,47 @@ import router from '../router'
 export default {
   data () {
     return {
-      first_name: '',
-      last_name: '',
-      email: '',
-      password: ''
+          user:{
+                fullName: '',
+                username: '',
+                password: '',
+                email: '',
+                height: '',
+                weight: '',
+                gender: '',
+                address: '',
+                age: ''
+              },
+          submitted: false
     }
-  },
+},
 
   methods: {
-    register () {
-      axios.post('users/register', {
-        first_name: this.first_name,
-        last_name: this.last_name,
-        email: this.email,
-        password: this.password
-      }).then(res => {
-        router.push({ name: 'Login' })
-      }).catch(err => {
-        console.log(err)
-      })
+    register (e) {
+      this.submitted = true;
+      this.$validator.validate().then(valid => {
+                if (valid) {
+                    const url = 'http://localhost:8082/fitnessapp/users/register';
+                    const body = this.user;
+                    const headers= {"content-type": "application/json"}  
+                    console.log("gender "+ body.gender);
+                    console.log("age "+ body.age);
+                    axios.post(url, body, headers).then(res => {
+                          if(res.data.id_token){
+                                    localStorage.setItem('usertoken',res.data.id_token);
+                                    console.log('usertoken'+ res.data.id_token);
+                                    router.push({ name: 'Login' })
+                          }else{
+                              console.log("Registraion Failed Due to server issues");
+                            // router.push({ name: 'Error' }) push to error page
+                          }
+                      }).catch(err => {
+                          console.log(err)
+                      })  
+                  } else {
+                    console.log('validatin Failed!! ')
+                  }
+      });      
     }
   }
 }

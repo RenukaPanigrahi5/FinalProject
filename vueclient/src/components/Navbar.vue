@@ -20,6 +20,21 @@
                     <router-link class="nav-link" to="/profile">Profile</router-link>
                 </li>
                 <li v-if="auth=='loggedin'" class="nav-item">
+                    <router-link class="nav-link" to="/diet">User Diet</router-link>
+                </li>
+                <li v-if="auth=='loggedin'" class="nav-item">
+                    <router-link class="nav-link" to="/workout">User Workout</router-link>
+                </li>
+                <li v-if="auth=='loggedin'" class="nav-item">
+                    <router-link class="nav-link" to="/friends">My Frineds List</router-link>
+                </li>
+                 <li v-if="auth=='loggedin'" class="nav-item">
+                    <router-link class="nav-link" to="/changePwd">Change Password</router-link>
+                </li>
+                 <li v-if="auth=='loggedin'" class="nav-item">
+                    <router-link class="nav-link" to="/about">About</router-link>
+                </li>
+                <li v-if="auth=='loggedin'" class="nav-item">
                     <a class="nav-link" href="" v-on:click="logout">Logout</a>
                 </li>
             </ul>
@@ -45,6 +60,7 @@ export default {
   methods: {
     logout () {
       localStorage.removeItem('usertoken')
+      localStorage.removeItem('userDetails')
     }
   },
 

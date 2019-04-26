@@ -9,10 +9,14 @@
                       <div v-if="submitted && errors.has('email')" class="invalid-feedback">{{ errors.first('email') }}</div>
                     </div>
                     <div class="form-group">
-                      <input type="password" v-model="user.password" v-validate="'required'" class="form-control" name="password" placeholder="Enter Password" :class="{ 'is-invalid': submitted && errors.has('password') }">
+                      <input type="password" v-model="user.password" v-validate="'required|min: 6'" class="form-control" name="password" placeholder="Enter Password"  ref="password" :class="{ 'is-invalid': submitted && errors.has('password') }">
                       <div v-if="submitted && errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}</div>
                     </div>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                    <div class="form-group">
+                      <input type="password" v-model="user.confirmPassword" v-validate="'required|confirmed:password'" class="form-control" name="confirmPassword" placeholder="Re-Enter Password" data-vv-as="password" :class="{ 'is-invalid': submitted && errors.has('confirmPassword') }">
+                      <div v-if="submitted && errors.has('confirmPassword')" class="invalid-feedback">{{ errors.first('confirmPassword') }}</div>
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Change Password</button>
                 </form>
             </div>
         </div>
@@ -28,42 +32,40 @@ export default {
   data () {
      return {
           user:{
-                password: '',
-                email: ''                
+                email: '',
+                password: '',                
+                confirmPassword:''               
               },
           submitted: false
     }
   },
 
   methods: {
-    login (e) {
+    login(e) {
               this.submitted = true;
               this.$validator.validate().then(valid => {                
                       if (valid) {
                                   this.submitted = true;                      
-                                  const url = 'http://localhost:8082/fitnessapp/users/authenticate';
+                                  const url = 'http://localhost:8082/fitnessapp/users/changePassword';
                                   const body = this.user;
                                   const headers= {"content-type": "application/json"}                      
-                                  console.log("in iside login "+body.email + body.password)
-                                  axios.post(url, body, headers).then(res => {
-                                        console.log('usertoken'+ res.data.id_token);
-                                        const parsedUser = JSON.stringify(res.data.user);
-                                        console.log('res.data.user.email '+ parsedUser);
-                                        localStorage.setItem('usertoken', res.data.id_token)
-                                        localStorage.setItem('userDetails', parsedUser)
-                                        router.push({ name: 'Profile' })
+                                  console.log("inside change password "+body.email + body.password)
+                                  axios.put(url, body, headers).then(res => {  
+                                        if(res){
+                                            console.log('res from server '+ res);
+                                            router.push({ name: 'Login' })
+                                        }else {
+                                          console.log("Password updatation Failed");
+                                            //router.push({ name: 'Error' }) push to error page
+                                        }                                        
                                   }).catch(err => {
                                         console.log("error"+err)
                                         // router.push({ name: 'Error' }) push to error page
                                   })
-                                  this.emitMethod()
                       }else{
                         console.log("Form validation Failed");
                       }                      
               });                
-    },    
-    emitMethod () {
-      EventBus.$emit('logged-in', 'loggedin')
     }
   }
 }
