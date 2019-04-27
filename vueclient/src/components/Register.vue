@@ -13,7 +13,7 @@
             <div v-if="submitted && errors.has('username')" class="invalid-feedback">{{ errors.first('username') }}</div>
           </div>          
           <div class="form-group">
-            <input type="password" v-model="user.password" v-validate="'required'" class="form-control" name="password" placeholder="Enter Password" :class="{ 'is-invalid': submitted && errors.has('password') }">
+            <input type="password" v-model="user.password" v-validate="'required|min: 6'" class="form-control" name="password" placeholder="Enter Password" :class="{ 'is-invalid': submitted && errors.has('password') }">
             <div v-if="submitted && errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}</div>
           </div>
           <div class="form-group">
@@ -21,11 +21,11 @@
             <div v-if="submitted && errors.has('email')" class="invalid-feedback">{{ errors.first('email') }}</div>
           </div>
            <div class="form-group">
-            <input type="number" v-model="user.height" v-validate="'required'" class="form-control" name="height" placeholder="Enter Height" :class="{ 'is-invalid': submitted && errors.has('height') }">
+            <input type="number" v-model="user.height" v-validate="'required'" class="form-control" name="height" placeholder="Enter Height in [centi meters]" :class="{ 'is-invalid': submitted && errors.has('height') }">
             <div v-if="submitted && errors.has('height')" class="invalid-feedback">{{ errors.first('height') }}</div>
           </div>
           <div class="form-group">
-            <input type="number" v-model="user.weight" v-validate="'required'" class="form-control" name="weight" placeholder="Enter Weight" :class="{ 'is-invalid': submitted && errors.has('weight') }">
+            <input type="number" v-model="user.weight" v-validate="'required'" class="form-control" name="weight" placeholder="Enter Weight [KG]" :class="{ 'is-invalid': submitted && errors.has('weight') }">
             <div v-if="submitted && errors.has('weight')" class="invalid-feedback">{{ errors.first('weight') }}</div>
           </div>
           <div class="form-group">
@@ -33,6 +33,7 @@
             <div v-if="submitted && errors.has('age')" class="invalid-feedback">{{ errors.first('age') }}</div>
           </div>
            <div class="form-group">
+             <label for="gender">Select Gender</label>
              <select name="gender" id="gender"  v-validate="'required'" v-model="user.gender" placeholder="Enter Gender" class="form-control" :class="{ 'is-invalid': submitted && errors.has('gender') }">               
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>

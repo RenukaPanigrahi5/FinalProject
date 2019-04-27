@@ -121,7 +121,7 @@ exports.changePassword = function (req, res) {
     const email = req.body.email;
     const password = req.body.password;
     const confirmPassword = req.body.confirmPassword;
-    console.log("email"+ email +"   password      "+ password + "    confirmPassword   ");    
+    console.log("email"+ email +"   password      "+ password + "    confirmPassword   "+confirmPassword);    
     if(password == confirmPassword){       
         User.getUserByEmail(email, (err, existingUser) => {
             if (err) {

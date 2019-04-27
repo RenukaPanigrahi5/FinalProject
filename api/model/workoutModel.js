@@ -16,6 +16,10 @@ const WorkoutSchema = mongoose.Schema({
     workoutDay: {
         type: String,
         required: 'true'
+    },
+    workoutInDetails:{
+        type: Array,
+        required: 'true'
     }
 });
 const Workouts = module.exports = mongoose.model('Workouts', WorkoutSchema);

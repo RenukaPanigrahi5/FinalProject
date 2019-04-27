@@ -65,7 +65,7 @@ export default {
 <style>
 .profileDiv {
             background-color: #c6b9e9;
-            height:500px;
+            height:700px;
             width:750px;
             align-content: center;
             border: 0in;            

@@ -5,6 +5,8 @@ import Login from '@/components/Login'
 import Register from '@/components/Register'
 import Profile from '@/components/Profile'
 import ChangePwd from '@/components/ChangePwd'
+import DietAndWorkoutSheet from '@/components/DietAndWorkoutSheet'
+
 
 
 Vue.use(Router)
@@ -35,6 +37,11 @@ export default new Router({
       path: '/changePwd',
       name: 'ChangePwd',
       component: ChangePwd
+    },
+    {
+      path: '/diet',
+      name: 'DietAndWorkoutSheet',
+      component: DietAndWorkoutSheet
     }
   ]
 })

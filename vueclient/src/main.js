@@ -4,8 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 require("../node_modules/bootstrap/dist/css/bootstrap.css")
-import VeeValidate from 'vee-validate';
 
+import 'vuetify/dist/vuetify.min.css'
+import VeeValidate from 'vee-validate';
+import Vuetify from 'vuetify' // Import Vuetify to your project
+Vue.use(Vuetify) // Add Vuetify as a plugin
 Vue.use(VeeValidate);
 Vue.config.productionTip = false
 

@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
+    <nav class="navbar navbar-expand-lg navbar-blue bg-dark rounded">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbar1"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -26,7 +26,7 @@
                     <router-link class="nav-link" to="/workout">User Workout</router-link>
                 </li>
                 <li v-if="auth=='loggedin'" class="nav-item">
-                    <router-link class="nav-link" to="/friends">My Frineds List</router-link>
+                    <router-link class="nav-link" to="/friends">My Friends List</router-link>
                 </li>
                  <li v-if="auth=='loggedin'" class="nav-item">
                     <router-link class="nav-link" to="/changePwd">Change Password</router-link>

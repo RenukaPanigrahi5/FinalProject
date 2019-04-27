@@ -9,7 +9,7 @@
                       <div v-if="submitted && errors.has('email')" class="invalid-feedback">{{ errors.first('email') }}</div>
                     </div>
                     <div class="form-group">
-                      <input type="password" v-model="user.password" v-validate="'required'" class="form-control" name="password" placeholder="Enter Password" :class="{ 'is-invalid': submitted && errors.has('password') }">
+                      <input type="password" v-model="user.password" v-validate="'required|min: 6'" class="form-control" name="password" placeholder="Enter Password" :class="{ 'is-invalid': submitted && errors.has('password') }">
                       <div v-if="submitted && errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}</div>
                     </div>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
@@ -46,17 +46,21 @@ export default {
                                   const headers= {"content-type": "application/json"}                      
                                   console.log("in iside login "+body.email + body.password)
                                   axios.post(url, body, headers).then(res => {
-                                        console.log('usertoken'+ res.data.id_token);
-                                        const parsedUser = JSON.stringify(res.data.user);
-                                        console.log('res.data.user.email '+ parsedUser);
-                                        localStorage.setItem('usertoken', res.data.id_token)
-                                        localStorage.setItem('userDetails', parsedUser)
-                                        router.push({ name: 'Profile' })
+                                        if(res.data.id_token){
+                                            console.log('usertoken'+ res.data.id_token);
+                                            const parsedUser = JSON.stringify(res.data.user);
+                                            console.log('res.data.user.email '+ parsedUser);
+                                            localStorage.setItem('usertoken', res.data.id_token)
+                                            localStorage.setItem('userDetails', parsedUser)
+                                            router.push({ name: 'Profile' })
+                                            this.emitMethod()
+                                        }else{
+                                          console.log("Wrong Password");
+                                        }                                        
                                   }).catch(err => {
                                         console.log("error"+err)
-                                        // router.push({ name: 'Error' }) push to error page
-                                  })
-                                  this.emitMethod()
+                                        // router.push({ name: 'Error' }) push to error page or user Toaster
+                                  })                                  
                       }else{
                         console.log("Form validation Failed");
                       }                      

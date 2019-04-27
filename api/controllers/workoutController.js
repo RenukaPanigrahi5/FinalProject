@@ -3,11 +3,12 @@ function isEmptyObject(obj) {
     return !Object.keys(obj).length;
 }
 exports.getWorkoutByCategory = function (req, res) {
-    const workoutCategory= req.body.workoutCategory;
+    const workoutCategory= req.query.workoutCategory;
+    
     Workout.getWorkoutCategory(workoutCategory, (err, workouts) => {
         if (err) throw err;
         if (isEmptyObject(workouts)) {
-            return res.json({ success: true, msg: 'DietSheet not found for the dietcategory'});
+            return res.json({ success: true, msg: 'Workouts not found for the dietcategory'});
         } else {
             res.json({
                 success: true,
