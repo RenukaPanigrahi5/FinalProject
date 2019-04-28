@@ -5,7 +5,8 @@ import Login from '@/components/Login'
 import Register from '@/components/Register'
 import Profile from '@/components/Profile'
 import ChangePwd from '@/components/ChangePwd'
-import DietAndWorkoutSheet from '@/components/DietAndWorkoutSheet'
+import WorkoutSheet from '@/components/WorkoutSheet'
+import DietSheet from '@/components/DietSheet'
 
 
 
@@ -39,9 +40,14 @@ export default new Router({
       component: ChangePwd
     },
     {
+      path: '/workout',
+      name: 'WorkoutSheet',
+      component: WorkoutSheet
+    },
+    {
       path: '/diet',
-      name: 'DietAndWorkoutSheet',
-      component: DietAndWorkoutSheet
+      name: 'DietSheet',
+      component: DietSheet
     }
   ]
 })

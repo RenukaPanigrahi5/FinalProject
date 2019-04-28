@@ -3,13 +3,24 @@ function isEmptyObject(obj) {
     return !Object.keys(obj).length;
 }
 exports.getDietByCategory = function (req, res) {
-    const dietCategory = req.body.dietCategory;
+    var dietCategory = req.query.dietCategory;
+    
+    if(dietCategory == "Healthy" ){
+        dietCategory = "UnderWeight"
+    }else if(dietCategory == "Obesity"){
+        dietCategory = "OverWeight"
+    }
     DietSheet.getDietByCategory(dietCategory, (err, dietSheets) => {
-        if (err) throw err;
-        if (isEmptyObject(dietSheets)) {
+        if (err) {
             return res.json({
-                success: true,
-                msg: 'DietSheet not found for the user' + dietCategory
+                success: false,
+                msg: 'there is some error ',
+                error: err
+            });
+        }else if (isEmptyObject(dietSheets)) {
+            return res.json({
+                success: false,
+                msg: 'DietSheet not found for this category' + dietCategory
             });
         }
         else {

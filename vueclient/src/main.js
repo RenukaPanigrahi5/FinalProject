@@ -3,14 +3,18 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Toaster from 'v-toaster'
 require("../node_modules/bootstrap/dist/css/bootstrap.css")
-
 import 'vuetify/dist/vuetify.min.css'
 import VeeValidate from 'vee-validate';
 import Vuetify from 'vuetify' // Import Vuetify to your project
 Vue.use(Vuetify) // Add Vuetify as a plugin
 Vue.use(VeeValidate);
+import 'v-toaster/dist/v-toaster.css'
+Vue.use(Toaster, {timeout: 5000})
+
 Vue.config.productionTip = false
+Vue.prototype.$BASE_URL = 'http://localhost:8082/fitnessapp/'
 
 /* eslint-disable no-new */
 new Vue({

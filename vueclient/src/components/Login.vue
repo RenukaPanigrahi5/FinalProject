@@ -41,25 +41,25 @@ export default {
               this.$validator.validate().then(valid => {                
                       if (valid) {
                                   this.submitted = true;                      
-                                  const url = 'http://localhost:8082/fitnessapp/users/authenticate';
+                                  const url = this.$BASE_URL+'users/authenticate';
+                                  this.$toaster.info('URL is   -- '+url)
                                   const body = this.user;
                                   const headers= {"content-type": "application/json"}                      
                                   console.log("in iside login "+body.email + body.password)
                                   axios.post(url, body, headers).then(res => {
                                         if(res.data.id_token){
-                                            console.log('usertoken'+ res.data.id_token);
+                                            this.$toaster.success('Login successful.')
                                             const parsedUser = JSON.stringify(res.data.user);
-                                            console.log('res.data.user.email '+ parsedUser);
                                             localStorage.setItem('usertoken', res.data.id_token)
                                             localStorage.setItem('userDetails', parsedUser)
                                             router.push({ name: 'Profile' })
                                             this.emitMethod()
                                         }else{
                                           console.log("Wrong Password");
+                                          this.$toaster.error('Wrong Password')
                                         }                                        
-                                  }).catch(err => {
-                                        console.log("error"+err)
-                                        // router.push({ name: 'Error' }) push to error page or user Toaster
+                                  }).catch(err => {                                      
+                                        this.$toaster.error('There is some error try again'+err)
                                   })                                  
                       }else{
                         console.log("Form validation Failed");

@@ -2,7 +2,7 @@
     <div class="container" style="align-center">
         <div class="jumbotron mt-5 profileDiv">
             <div class="col-sm-8 mx-auto">
-                <h3 class="text-center">User Workout Details as per their BMI</h3>
+                <h3 class="text-center">User Workout Details as per your BMI</h3>
             </div>
             <div>
                 <table class="table col-md-6 mx-auto  text-center">
@@ -22,7 +22,7 @@
                                 </tr>
                                 <tr>
                                     <td>WorkoutCategory</td>
-                                    <td>OverWeightMale</td>
+                                    <td>{{this.workoutCategory}}</td>
                                 </tr>                                    
                         </tbody>
                     </tbody>
@@ -41,8 +41,7 @@
                                              Workout Type:  {{ workout.workoutType }} <br>                                             
                                                 <li v-for="subWorkout in workout.workoutInDetails">
                                                     {{ subWorkout.name }}  --> noOfSets ::  {{ subWorkout.noOfSets }}
-                                                </li>
-                                            
+                                                </li>                                            
                                 </v-card-text>
                             </v-card>
                         </v-tab-item>
@@ -50,7 +49,6 @@
                 </div>             
             </div>
         </div>
-    </div>
     </div>
 </template>
 
@@ -63,7 +61,8 @@ export default {
         return{
             workouts: [],
             active: null,
-            text: ''
+            text: '',
+            workoutCategory: ''
             }      
  },
  created(){
@@ -71,18 +70,22 @@ export default {
         if (localStorage.getItem('userDetails')) {
             this.userDetailsFromLocalStorage = JSON.parse(localStorage.getItem('userDetails'));
         }
-        const workoutCategory = "OverWeightMale";
-        const url = 'http://localhost:8082/fitnessapp/workout/getWorkoutCategory?workoutCategory='+workoutCategory;
-        console.log("url -- "+ url);
+        
+       // const workoutCategory = "OverWeightMale";
+        
+        const gender = this.userDetailsFromLocalStorage.gender;
+        this.workoutCategory = this.calculateBMI()+gender;        
+        
+        const url = this.$BASE_URL+'workout/getWorkoutCategory?workoutCategory='+this.workoutCategory;
+        
         const headers= {"content-type": "application/json"}  
         axios.get(url, headers).then(res => {
             console.log('fullName from API ');
             if(res.data.workouts){
-                    this.workouts = res.data.workouts;  
-                    console.log("response from API"+this.workouts);              
+                    this.workouts = res.data.workouts;            
             }
         }).catch(err => {
-            console.log("not able to fetch data from server")
+            this.$toaster.error('not able to fetch data from server.'+err)
         })
 
  },
@@ -92,21 +95,23 @@ export default {
         this.active = (active < 2 ? active + 1 : 0)
       },
       calculateBMI(){
+          console.log("inside BMI");
         const user = localStorage.getItem('userDetails');
         if (localStorage.getItem('userDetails')) {
             this.userDetailsFromLocalStorage = JSON.parse(localStorage.getItem('userDetails'));
             const height =  this.userDetailsFromLocalStorage.height/100;     
             const weight =  this.userDetailsFromLocalStorage.weight;
             const BMI = weight/(height*height) 
-            
-            if (BMI < 18.5)
-               console.log("BMI is less than 18.5  underweight"+ BMI)            
-            else if ( BMI >= 18.5 && BMI < 24.9) 
-                console.log("Healthy");            
-            else if ( BMI >= 24.9 && BMI < 30) 
-                console.log("overweight");           
-            else if ( BMI >=30)
-                console.log("Suffering from Obesity");
+            console.log(BMI);
+            if (BMI < 18.5) {     
+               return "UnderWeight"  
+            }else if ( BMI >= 18.5 && BMI < 24.9) {
+               return "Healthy"            
+            } else if ( BMI >= 24.9 && BMI < 30) {
+                return "OverWeight"  
+            }else if ( BMI >=30) {
+                return "Obesity" 
+            }
         }        
       }
     }

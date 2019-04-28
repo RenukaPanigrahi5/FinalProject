@@ -3,8 +3,16 @@ function isEmptyObject(obj) {
     return !Object.keys(obj).length;
 }
 exports.getWorkoutByCategory = function (req, res) {
-    const workoutCategory= req.query.workoutCategory;
-    
+    var workoutCategory= req.query.workoutCategory;
+    if(workoutCategory == "HealthyMale" ){
+        workoutCategory = "UnderWeightMale"
+    }else if(workoutCategory == "HealthyFemale"){
+        workoutCategory = "UnderWeightFemale"
+    }else if(workoutCategory == "ObesityMale"){
+        workoutCategory = "OverWeightMale"
+    }else if(workoutCategory == "ObesityFemale"){
+        workoutCategory = "OverWeightMale"
+    }
     Workout.getWorkoutCategory(workoutCategory, (err, workouts) => {
         if (err) throw err;
         if (isEmptyObject(workouts)) {

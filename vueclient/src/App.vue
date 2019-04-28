@@ -10,11 +10,12 @@
 import Vue from 'vue'
 import facebookLogin from 'vue-facebook-login-component';
 import Navbar from './components/Navbar'
+
 export default {
   name: 'App',
   components: {
      facebookLogin, 
-    'Navbar': Navbar
+     'Navbar': Navbar
   }
 }
 </script>

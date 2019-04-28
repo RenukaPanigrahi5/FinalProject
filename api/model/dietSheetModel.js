@@ -1,21 +1,18 @@
 const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 // User Schema
-const DietSheetSchema = mongoose.Schema({
-    dietName: {
-        type: String
-    },
-    dietType: {
-        type: String,
-        required: true
-    },
+const DietSheetSchema = mongoose.Schema({     
     dietCategory: {
         type: String,
         required: true
     },
-    daysToFollow: {
+    dietTime: {
         type: String,
-        required: true
+        required: 'true'
+    },
+    dietInDetails:{
+        type: Array,
+        required: 'true'
     }
 
 });

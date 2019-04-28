@@ -46,24 +46,20 @@ export default {
               this.$validator.validate().then(valid => {                
                       if (valid) {
                                   this.submitted = true;                      
-                                  const url = 'http://localhost:8082/fitnessapp/users/changePassword';
+                                  const url = this.$BASE_URL+'users/changePassword';
                                   const body = this.user;
-                                  const headers= {"content-type": "application/json"}                      
-                                  console.log("inside change password "+body.email + body.password)
+                                  const headers= {"content-type": "application/json"}    
                                   axios.put(url, body, headers).then(res => {  
-                                        if(res){
-                                            console.log('res from server '+ res);
+                                        if(res){                                            
                                             router.push({ name: 'Login' })
                                         }else {
-                                          console.log("Password updatation Failed");
-                                            //router.push({ name: 'Error' }) push to error page
+                                          this.$toaster.error('Password updatation Failed')
                                         }                                        
                                   }).catch(err => {
-                                        console.log("error"+err)
-                                        // router.push({ name: 'Error' }) push to error page
+                                         this.$toaster.error('Password updatation Failed', {timeout: 20000} + err)                                       
                                   })
-                      }else{
-                        console.log("Form validation Failed");
+                      } else {
+                        this.$toaster.error('Form validation Failed')
                       }                      
               });                
     }

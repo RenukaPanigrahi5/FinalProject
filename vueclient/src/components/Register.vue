@@ -79,25 +79,23 @@ export default {
       this.submitted = true;
       this.$validator.validate().then(valid => {
                 if (valid) {
-                    const url = 'http://localhost:8082/fitnessapp/users/register';
+                    const url = this.$BASE_URL+'users/register';
                     const body = this.user;
-                    const headers= {"content-type": "application/json"}  
-                    console.log("gender "+ body.gender);
-                    console.log("age "+ body.age);
+                    const headers= {"content-type": "application/json"} 
                     axios.post(url, body, headers).then(res => {
                           if(res.data.id_token){
                                     localStorage.setItem('usertoken',res.data.id_token);
-                                    console.log('usertoken'+ res.data.id_token);
+                                    this.$toaster.success('Registration Successful.')
                                     router.push({ name: 'Login' })
                           }else{
-                              console.log("Registraion Failed Due to server issues");
+                              this.$toaster.error('Registraion Failed.')                              
                             // router.push({ name: 'Error' }) push to error page
                           }
-                      }).catch(err => {
-                          console.log(err)
+                      }).catch(err => {                       
+                        this.$toaster.error('Registraion Failed.', {timeout: 20000} + err)
                       })  
                   } else {
-                    console.log('validatin Failed!! ')
+                     this.$toaster.error('validatin Failed!! ')       
                   }
       });      
     }
