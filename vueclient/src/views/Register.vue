@@ -88,11 +88,11 @@ export default {
                                     this.$toaster.success('Registration Successful.')
                                     router.push({ name: 'Login' })
                           }else{
-                              this.$toaster.error('Registraion Failed.')                              
+                              this.$toaster.error('Registration Failed.')                              
                             // router.push({ name: 'Error' }) push to error page
                           }
                       }).catch(err => {                       
-                        this.$toaster.error('Registraion Failed.', {timeout: 20000} + err)
+                        this.$toaster.error('Registration Failed.', {timeout: 20000} + err)
                       })  
                   } else {
                      this.$toaster.error('validatin Failed!! ')       

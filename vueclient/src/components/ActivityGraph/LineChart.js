@@ -1,6 +1,5 @@
 import axios from 'axios'
 import {Line} from 'vue-chartjs';
-//import {watchdogData} from './../../config'
 
 export default {
     extends: Line,
@@ -8,15 +7,15 @@ export default {
        return {
           datacollection: {
              //Data to be represented on x-axis
-             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+             labels: [],
              datasets: [{
-                label: 'Data One',
+                label: 'Running in meters',
                 backgroundColor: '#f87979',
                 pointBackgroundColor: 'white',
                 borderWidth: 1,
                 pointBorderColor: '#249EBF',
                 //Data to be represented on y-axis
-                data: [40, 20, 30, 50, 90, 10, 20, 40, 50, 70, 90, 100]
+               data: []
              }]
           },
           //Chart.js options that controls the appearance of the chart
@@ -44,7 +43,25 @@ export default {
           }
        }
     },
-    mounted() {
+    beforeMount: async function(){
+          if (localStorage.getItem('userDetails')) {
+              this.userDetailsFromLocalStorage = JSON.parse(localStorage.getItem('userDetails'));
+          }
+          
+          const email = this.userDetailsFromLocalStorage.email;      
+          
+          const url = this.$BASE_URL+'activity/getActivityInfo?email='+email;
+          const headers= {"content-type": "application/json"}  
+          await axios.get(url, headers).then(res => {
+              if(res.data){                
+                        this.data = res.data.activityData;
+                        this.labels = res.data.labels;         
+              }
+          }).catch(err => {
+              this.$toaster.error('not able to fetch data from server.'+err)
+          })          
+   },
+   mounted: async function() {
        //renderChart function renders the chart with the datacollection and options object.
        this.renderChart(this.datacollection, this.options)
     }

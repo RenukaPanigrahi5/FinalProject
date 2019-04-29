@@ -104,7 +104,6 @@ module.exports.changePassword = function(newUser, callback) {
         throw err;
       }
       newUser.password = hash;
-     // newUser.save(callback);
       User.findOneAndUpdate({_id: newUser._id}, {password: newUser.password}, {new: true}, callback);
     });
   });    

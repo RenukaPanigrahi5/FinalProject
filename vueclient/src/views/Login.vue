@@ -22,7 +22,7 @@
 <script>
 import axios from 'axios'
 import router from '../router'
-import EventBus from './EventBus'
+import EventBus from '../components/EventBus'
 
 export default {
   data () {
@@ -39,10 +39,8 @@ export default {
     login (e) {
               this.submitted = true;
               this.$validator.validate().then(valid => {                
-                      if (valid) {
-                                  this.submitted = true;                      
+                      if (valid) {                                                       
                                   const url = this.$BASE_URL+'users/authenticate';
-                                  this.$toaster.info('URL is   -- '+url)
                                   const body = this.user;
                                   const headers= {"content-type": "application/json"}                      
                                   console.log("in iside login "+body.email + body.password)
@@ -52,6 +50,7 @@ export default {
                                             const parsedUser = JSON.stringify(res.data.user);
                                             localStorage.setItem('usertoken', res.data.id_token)
                                             localStorage.setItem('userDetails', parsedUser)
+                                            localStorage.setItem('email', res.data.user.email)                                            
                                             router.push({ name: 'Profile' })
                                             this.emitMethod()
                                         }else{

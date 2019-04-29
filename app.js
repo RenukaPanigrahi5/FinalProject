@@ -1,11 +1,11 @@
-const express = require('express');
-path = require('path');
-bodyParser = require('body-parser');
-cors = require('cors');
-passport = require('passport');
-mongoose = require('mongoose');
-config = require('./api/config/database');
-errorhandler    = require('errorhandler');
+const express = require('express'),
+      path = require('path'),
+      bodyParser = require('body-parser'),
+      cors = require('cors'),
+      passport = require('passport'),
+      mongoose = require('mongoose'),
+      config = require('./api/config/database'),
+      errorhandler = require('errorhandler');
 
 //userFindAndModify is default while doing
 //findOneAndUpdate need to make false
@@ -26,10 +26,11 @@ mongoose.connection.on('error', (err) => {
 
 const app = express();
 
-const users = require('./api/routes/usersRoutes');
- dietSheet = require('./api/routes/dietSheetRoutes');
- workout = require('./api/routes/workoutsRoutes');
- trainer = require('./api/routes/trainerRoutes');
+const users = require('./api/routes/usersRoutes'),
+ dietSheet = require('./api/routes/dietSheetRoutes'),
+ workout = require('./api/routes/workoutsRoutes'),
+ trainer = require('./api/routes/trainerRoutes'),
+ activity = require('./api/routes/activityRoutes');
 
 
 
@@ -63,6 +64,7 @@ app.use('/fitnessapp/users', users);
 app.use('/fitnessapp/dietSheet', dietSheet);
 app.use('/fitnessapp/workout', workout);
 app.use('/fitnessapp/trainer', trainer);
+app.use('/fitnessapp/activity', activity);
 
 // Index Route
 app.get('/fitnessapp', (req, res) => {

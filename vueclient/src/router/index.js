@@ -1,17 +1,18 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
-import Login from '@/components/Login'
-import Register from '@/components/Register'
-import Profile from '@/components/Profile'
-import ChangePwd from '@/components/ChangePwd'
-import WorkoutSheet from '@/components/WorkoutSheet'
-import DietSheet from '@/components/DietSheet'
-import ActivityLog from '@/components/ActivityLog'
+
+//import ActivityLog from '@/components/ActivityLog'
 import About from '@/components/About'
 import ActivityGraph from '@/components/ActivityGraph/ActivityGraph'
 
-
+import Login from '../views/Login'
+import Register from '../views/Register'
+import Profile from '../views/Profile'
+import ChangePwd from '../views/ChangePwd'
+import WorkoutSheet from '../views/WorkoutSheet'
+import DietSheet from '../views/DietSheet'
+import ActivityLog from '../views/ActivityLog'
 
 Vue.use(Router)
 

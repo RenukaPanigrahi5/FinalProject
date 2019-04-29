@@ -1,8 +1,8 @@
-<template>
+\<template>
     <div class="container" style="align-center">
         <div class="jumbotron mt-5 profileDiv">
             <div class="col-sm-8 mx-auto">
-                <h3 class="text-center">User Workout Details as per your BMI</h3>
+                <h3 class="text-center"> Diet details as per your BMI</h3>
             </div>
             <div>
                 <table class="table col-md-6 mx-auto  text-center">
@@ -21,8 +21,8 @@
                                     <td>{{this.userDetailsFromLocalStorage.weight}}</td>
                                 </tr>
                                 <tr>
-                                    <td>WorkoutCategory</td>
-                                    <td>{{this.workoutCategory}}</td>
+                                    <td>DietCategory</td>
+                                    <td>{{this.dietCategory}}</td>
                                 </tr>                                    
                         </tbody>
                     </tbody>
@@ -32,15 +32,14 @@
             <div>               
                 <div>
                     <v-tabs  v-model="active" color="blue"  dark slider-color="yellow" >
-                        <v-tab v-for="workout in this.workouts"  :key="workout" ripple >
-                             {{ workout.workoutDay }}
+                        <v-tab v-for="dietSheet in this.dietSheets"  :key="dietSheet" ripple >
+                             {{ dietSheet.dietTime }}
                         </v-tab>                        
-                        <v-tab-item v-for="workout in this.workouts"  :key="workout" ripple>                            
+                        <v-tab-item v-for="dietSheet in this.dietSheets"  :key="dietSheet" ripple>                            
                             <v-card flat>
-                                <v-card-text>Workout For: {{ workout.workoutName }} <br>
-                                             Workout Type:  {{ workout.workoutType }} <br>                                             
-                                                <li v-for="subWorkout in workout.workoutInDetails">
-                                                    {{ subWorkout.name }}  --> noOfSets ::  {{ subWorkout.noOfSets }}
+                                <v-card-text>                                      
+                                                <li v-for="subDietSheet in dietSheet.dietInDetails">
+                                                     {{ subDietSheet.name }}
                                                 </li>                                            
                                 </v-card-text>
                             </v-card>
@@ -55,14 +54,14 @@
 <script>
 import axios from 'axios'
 import router from '../router'
-import EventBus from './EventBus'
+import EventBus from '../components/EventBus'
 export default {
   data: function() {    
         return{
-            workouts: [],
-            active: null,
-            text: '',
-            workoutCategory: ''
+                dietSheets: [],
+                active: null,
+                text: '',
+                dietCategory: ''
             }      
  },
  created(){
@@ -71,18 +70,16 @@ export default {
             this.userDetailsFromLocalStorage = JSON.parse(localStorage.getItem('userDetails'));
         }
         
-       // const workoutCategory = "OverWeightMale";
+       // const workoutCategory = "OverWeightMale";        
+       
+        this.dietCategory = this.calculateBMI();        
         
-        const gender = this.userDetailsFromLocalStorage.gender;
-        this.workoutCategory = this.calculateBMI()+gender;        
-        
-        const url = this.$BASE_URL+'workout/getWorkoutCategory?workoutCategory='+this.workoutCategory;
-        
+        const url = this.$BASE_URL+'dietSheet/getDietByCategory?dietCategory='+this.dietCategory;
         const headers= {"content-type": "application/json"}  
         axios.get(url, headers).then(res => {
             console.log('fullName from API ');
-            if(res.data.workouts){
-                    this.workouts = res.data.workouts;            
+            if(res.data.dietSheets){
+                    this.dietSheets = res.data.dietSheets;             
             }
         }).catch(err => {
             this.$toaster.error('not able to fetch data from server.'+err)

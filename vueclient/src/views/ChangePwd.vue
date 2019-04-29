@@ -26,7 +26,7 @@
 <script>
 import axios from 'axios'
 import router from '../router'
-import EventBus from './EventBus'
+import EventBus from '../components/EventBus'
 
 export default {
   data () {

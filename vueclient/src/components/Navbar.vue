@@ -26,23 +26,22 @@
                     <router-link class="nav-link" to="/workout">User Workout</router-link>
                 </li>
                 <li v-if="auth=='loggedin'" class="nav-item">
+                    <router-link class="nav-link" to="/activityGraph">ActivityGraph</router-link>
+                </li>
+                 <li v-if="auth=='loggedin'" class="nav-item">
+                    <router-link class="nav-link" to="/activityLog">ActivityLog</router-link>
+                </li> 
+                <li v-if="auth=='loggedin'" class="nav-item">
                     <router-link class="nav-link" to="/friends">My Friends List</router-link>
                 </li>
                  <li v-if="auth=='loggedin'" class="nav-item">
                     <router-link class="nav-link" to="/changePwd">Change Password</router-link>
-                </li>
-                 <li v-if="auth=='loggedin'" class="nav-item">
-                    <router-link class="nav-link" to="/activityLog">ActivityLog</router-link>
-                </li>
-                <li v-if="auth=='loggedin'" class="nav-item">
-                    <router-link class="nav-link" to="/activityGraph">ActivityGraph</router-link>
-                </li>
+                </li>                               
                 <li v-if="auth=='loggedin'" class="nav-item">
                     <router-link class="nav-link" to="/about">About</router-link>
                     <li v-if="auth=='loggedin'" class="nav-item">
                     <a class="nav-link" href="" v-on:click="logout">Logout</a>
-                </li>
-                </li>
+                </li>                
             </ul>
         </div>
     </nav>
@@ -67,6 +66,7 @@ export default {
     logout () {
       localStorage.removeItem('usertoken')
       localStorage.removeItem('userDetails')
+      localStorage.removeItem('email')
     }
   },
 
