@@ -77,8 +77,7 @@ export default {
         const url = this.$BASE_URL+'dietSheet/getDietByCategory?dietCategory='+this.dietCategory;
         const headers= {"content-type": "application/json"}  
         axios.get(url, headers).then(res => {
-            console.log('fullName from API ');
-            if(res.data.dietSheets){
+           if(res.data.dietSheets){
                     this.dietSheets = res.data.dietSheets;             
             }
         }).catch(err => {
@@ -92,14 +91,13 @@ export default {
         this.active = (active < 2 ? active + 1 : 0)
       },
       calculateBMI(){
-          console.log("inside BMI");
         const user = localStorage.getItem('userDetails');
         if (localStorage.getItem('userDetails')) {
             this.userDetailsFromLocalStorage = JSON.parse(localStorage.getItem('userDetails'));
             const height =  this.userDetailsFromLocalStorage.height/100;     
             const weight =  this.userDetailsFromLocalStorage.weight;
             const BMI = weight/(height*height) 
-            console.log(BMI);
+            
             if (BMI < 18.5) {     
                return "UnderWeight"  
             }else if ( BMI >= 18.5 && BMI < 24.9) {

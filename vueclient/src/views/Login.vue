@@ -43,7 +43,7 @@ export default {
                                   const url = this.$BASE_URL+'users/authenticate';
                                   const body = this.user;
                                   const headers= {"content-type": "application/json"}                      
-                                  console.log("in iside login "+body.email + body.password)
+                                  console.log("in inside login "+body.email + body.password)
                                   axios.post(url, body, headers).then(res => {
                                         if(res.data.id_token){
                                             this.$toaster.success('Login successful.')
@@ -54,8 +54,8 @@ export default {
                                             router.push({ name: 'Profile' })
                                             this.emitMethod()
                                         }else{
-                                          console.log("Wrong Password");
-                                          this.$toaster.error('Wrong Password')
+                                          
+                                         this.$toaster.error('Wrong Password')
                                         }                                        
                                   }).catch(err => {                                      
                                         this.$toaster.error('There is some error try again'+err)
