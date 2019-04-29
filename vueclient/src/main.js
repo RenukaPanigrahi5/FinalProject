@@ -12,7 +12,11 @@ Vue.use(Vuetify) // Add Vuetify as a plugin
 Vue.use(VeeValidate);
 import 'v-toaster/dist/v-toaster.css'
 Vue.use(Toaster, {timeout: 5000})
-
+import "chart.js";
+import "hchs-vue-charts";
+Vue.use(window.VueCharts);
+import ActivityGraph from './components/ActivityGraph/ActivityGraph.vue'
+Vue.component('activity-graph',ActivityGraph)
 Vue.config.productionTip = false
 Vue.prototype.$BASE_URL = 'http://localhost:8082/fitnessapp/'
 

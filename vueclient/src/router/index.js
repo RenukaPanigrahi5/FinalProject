@@ -7,6 +7,9 @@ import Profile from '@/components/Profile'
 import ChangePwd from '@/components/ChangePwd'
 import WorkoutSheet from '@/components/WorkoutSheet'
 import DietSheet from '@/components/DietSheet'
+import ActivityLog from '@/components/ActivityLog'
+import About from '@/components/About'
+import ActivityGraph from '@/components/ActivityGraph/ActivityGraph'
 
 
 
@@ -48,6 +51,21 @@ export default new Router({
       path: '/diet',
       name: 'DietSheet',
       component: DietSheet
-    }
+    },
+    {
+      path: '/activityLog',
+      name: 'ActivityLog',
+      component: ActivityLog
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: About
+    },
+    {
+       path: '/activityGraph',
+       name: 'ActivityGraph',
+       component: ActivityGraph
+     }
   ]
 })

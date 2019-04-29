@@ -16,6 +16,7 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.8.0",
+    "hchs-vue-charts": "^1.2.8",
     "jquery": "^1.9.1",
     "jwt-decode": "^2.2.0",
     "popper.js": "^1.12.9",
