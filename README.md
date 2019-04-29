@@ -2,7 +2,7 @@
 Fitness Tracker
 
 Home Page:
- A simple webpage that let the user to register. If he/she is registered the page allows the user to login with username and password.
+ A simple webpage describes what is the Fitness Application.
 
 Login Page:
 A page with username and password fields.
@@ -11,12 +11,12 @@ Signup page:
 It contains user details.
  
 User's profile page:
- Having user's personal data.
+Having user's personal data.
 
-Captures the age & height as a attribute as a primary data. Based on that it redirects to particular diet chart.
+Captures the age & height as a attribute as a primary data. Based on that it redirects to particular diet chart and workouts page.
 
 Diet Page:
-Food to be intake based on the age & Height of the person.
+Food to be intake based on underweight,overweight and obesity.
 
 Exercise Page:
 According to the diet, exercises are defined.
@@ -24,13 +24,16 @@ According to the diet, exercises are defined.
 Activity Log:
 The history of diet and exercises of an person.
 
-Sharing with friends :
-User can share their log with friends.
+My friends:
+User can share their activites with their friends.
+
+About:
+About the fitness app.
 
 
 ## ProjectSetUp
 
-This Fitness App uses Nodejs, Express.js, Passport jwt for authentication and MongoDb
+This Fitness App uses Nodejs, Express.js, Passport jwt, vuejs[client]for authentication and MongoDb as database.
 
 To start the MongoDb
 
@@ -41,6 +44,10 @@ Start the server
 npm run start
 
 Runs on port 8082
+
+Start the client
+
+npm start or npm run dev
 
 ## RestAPI
 
