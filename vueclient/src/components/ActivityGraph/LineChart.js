@@ -15,7 +15,7 @@ export default {
                 borderWidth: 1,
                 pointBorderColor: '#249EBF',
                 //Data to be represented on y-axis
-               data: []
+                data: []
              }]
           },
           //Chart.js options that controls the appearance of the chart
