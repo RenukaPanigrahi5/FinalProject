@@ -17,6 +17,7 @@ import "hchs-vue-charts";
 Vue.use(window.VueCharts);
 import ActivityGraph from './components/ActivityGraph/ActivityGraph.vue'
 Vue.component('activity-graph',ActivityGraph)
+import facebookLogin from 'facebook-login-vuejs';
 Vue.config.productionTip = false
 Vue.prototype.$BASE_URL = 'http://localhost:8082/fitnessapp/'
 

@@ -13,6 +13,9 @@
                       <div v-if="submitted && errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}</div>
                     </div>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                    
+                    <facebook-login class="button" appId="578465222651262" @login="onLogin" @logout="onLogout" @sdk-loaded="sdkLoaded"></facebook-login>
+                    </div> 
                 </form>
             </div>
         </div>
