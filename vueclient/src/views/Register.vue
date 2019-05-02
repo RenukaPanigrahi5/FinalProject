@@ -4,10 +4,10 @@
       <div class="col-md-6 mt-5 mx-auto">
         <form v-on:submit.prevent="register">
           <h1 class="h3 mb-3 font-weight-normal">Register</h1>
-          <div class="form-group">            
-            <input type="text" v-model="user.fullName" v-validate="'required'" class="form-control" name="fullName" placeholder="Enter Full Name" :class="{ 'is-invalid': submitted && errors.has('fullName') }">
+          <div class="form-group">
+           <input type="text" v-model="user.fullName" v-validate="'required'" class="form-control" name="fullName" placeholder="Enter Full Name" :class="{ 'is-invalid': submitted && errors.has('fullName') }"></i>
             <div v-if="submitted && errors.has('fullName')" class="invalid-feedback">{{ errors.first('fullName') }}</div>
-          </div>
+            </div>
           <div class="form-group">
             <input type="text" v-model="user.username" v-validate="'required'" class="form-control" name="username" placeholder="Enter User Name" :class="{ 'is-invalid': submitted && errors.has('username') }">
             <div v-if="submitted && errors.has('username')" class="invalid-feedback">{{ errors.first('username') }}</div>
@@ -45,7 +45,8 @@
             <input type="text" v-model="user.address" v-validate="'required'" class="form-control" name="address" placeholder="Enter Address" :class="{ 'is-invalid': submitted && errors.has('address') }">
             <div v-if="submitted && errors.has('address')" class="invalid-feedback">{{ errors.first('address') }}</div>
           </div>
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">
+            <i class="fa fa-registered"></i>Register</button>
         </form>
       </div>
     </div>

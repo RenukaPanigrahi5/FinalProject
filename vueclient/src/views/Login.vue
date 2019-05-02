@@ -12,9 +12,9 @@
                       <input type="password" v-model="user.password" v-validate="'required|min: 6'" class="form-control" name="password" placeholder="Enter Password" :class="{ 'is-invalid': submitted && errors.has('password') }">
                       <div v-if="submitted && errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}</div>
                     </div>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-
-                </form>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">
+                      <i class="fa fa-sign-in"></i>Sign in</button>
+                      </form>
             </div>
         </div>
     </div>
