@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
+const friendsController = require('../controllers/friendsController');
 //Register
 router.post('/register', userController.addNewUser);
 //if the userNames is already exists warns in advance
@@ -13,5 +14,10 @@ router.get('/displayAllUsers', userController.listAllUsers);
 router.delete('/deleteUsers', userController.removeUserDetails);
 router.get('/userProfile', userController.getUserProfileByEmail);
 router.put('/changePassword', userController.changePassword);
+
+//add and remove friends 
+router.post('/addNewFriend', friendsController.addNewFriend);
+router.get('/listAllFriends', friendsController.listAllFriends);
+router.delete('/deleteFriend', friendsController.removeFriend);
 
 module.exports = router;

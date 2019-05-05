@@ -6,6 +6,11 @@
         v-bind:datasets="datasets" v-bind:option="option">
         ></chartjs-doughnut>
     </div>
+        <div class="shareWith">
+            <p>Share with friends through Facebook and googleplus</p>
+        <ShareFacebook url="http://localhost:8082/fitnessapp/activity/addActivitiyLog"/>    
+        <ShareGooglePlus url="http://localhost:8082/fitnessapp/activity/addActivitiyLog"/>    
+    </div>
     </div>
     <div class="container">
         <div class="row">
@@ -32,7 +37,7 @@
                 </form>
             </div>
         </div>
-    </div>        
+    </div>   
 </div>
     
 </template>
@@ -41,8 +46,10 @@
 import axios from 'axios'
 import router from '../router'
 import EventBus from '../components/EventBus'
+import { ShareFacebook,  ShareGooglePlus } from 'vue-share-social'
 
-export default {
+
+export default {    
     data: function() {
         return {
             labels: [],
@@ -75,7 +82,7 @@ export default {
             console.log('fullName from API ');
             if(res.data){
                 this.labels = res.data.labels;
-                this.datasets.data = res.data.activityData;     
+                this.data = res.data.activityData;     
                 console.log("res.data.labels-- "+res.data.labels);
                 console.log("res.data.activityData -- "+ res.data.activityData);                 
             }
@@ -112,7 +119,18 @@ export default {
 
 
       }
+    },
+    components: {
+        ShareFacebook,
+        ShareGooglePlus
     }
-
 };
 </script>
+<style>
+div.shareWith{
+ width: 500px;
+ margin: auto;
+ align-items: center;
+ border: 3px solid #73ad73;
+}
+</style>

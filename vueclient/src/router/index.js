@@ -13,6 +13,7 @@ import ChangePwd from '../views/ChangePwd'
 import WorkoutSheet from '../views/WorkoutSheet'
 import DietSheet from '../views/DietSheet'
 import ActivityLog from '../views/ActivityLog'
+import MyFriendsAndShare from '../views/MyFriendsAndShare'
 
 Vue.use(Router)
 
@@ -67,6 +68,11 @@ export default new Router({
        path: '/activityGraph',
        name: 'ActivityGraph',
        component: ActivityGraph
-     }
+     },
+     {
+      path: '/friends',
+      name: 'MyFriendsAndShare',
+      component: MyFriendsAndShare
+    }
   ]
 })

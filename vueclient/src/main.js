@@ -8,6 +8,12 @@ require("../node_modules/bootstrap/dist/css/bootstrap.css")
 import 'vuetify/dist/vuetify.min.css'
 import VeeValidate from 'vee-validate';
 import Vuetify from 'vuetify' // Import Vuetify to your project
+import VueShareSocial from 'vue-share-social'
+import DataTable from 'v-data-table'
+
+
+Vue.use(DataTable)
+Vue.use(VueShareSocial)
 Vue.use(Vuetify) // Add Vuetify as a plugin
 Vue.use(VeeValidate);
 import 'v-toaster/dist/v-toaster.css'

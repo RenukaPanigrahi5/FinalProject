@@ -1,4 +1,4 @@
-\<template>
+<template>
     <div class="container" style="align-center">
         <div class="jumbotron mt-5 profileDiv">
             <div class="col-sm-8 mx-auto">
