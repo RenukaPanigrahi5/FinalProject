@@ -10,12 +10,14 @@ import VeeValidate from 'vee-validate';
 import Vuetify from 'vuetify' // Import Vuetify to your project
 import VueShareSocial from 'vue-share-social'
 import DataTable from 'v-data-table'
+import vSelect from 'vue-select';
 
 
 Vue.use(DataTable)
 Vue.use(VueShareSocial)
 Vue.use(Vuetify) // Add Vuetify as a plugin
 Vue.use(VeeValidate);
+Vue.component('v-select',vSelect);
 import 'v-toaster/dist/v-toaster.css'
 Vue.use(Toaster, {timeout: 5000})
 import "chart.js";

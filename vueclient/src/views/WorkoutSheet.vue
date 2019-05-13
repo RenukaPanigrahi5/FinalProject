@@ -121,8 +121,8 @@ export default {
             }
         }        
       },
-      onSearch(serachedText){
-            const url = this.$BASE_URL+'workout/getAllworkoutsBySearchedText?serachedText='+serachedText;
+      onSearch(searchedText){
+            const url = this.$BASE_URL+'workout/getAllworkoutsBySearchedText?searchedText='+searchedText;
         
             const headers= {"content-type": "application/json"}  
             axios.get(url, headers).then(res => {

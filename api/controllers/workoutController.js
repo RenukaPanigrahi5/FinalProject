@@ -50,7 +50,7 @@ exports.addNewWorkout = function (req, res) {
 exports.listWorkoutsByText = function (req, res) {
     var allWorkoutNames = [];
     var selectedWorkoutsByText = [];    
-    const searchText = req.query.serachedText;
+    const searchText = req.query.searchedText;
     Workout.getAllWorkouts((err, workoutsList) => {
         if (err) {
             res.json({ success: false, msg: 'Failed to list all workouts' });
