@@ -46,3 +46,25 @@ exports.addNewWorkout = function (req, res) {
         });
     }
 };
+
+exports.listWorkoutsByText = function (req, res) {
+    var allWorkoutNames = [];
+    var selectedWorkoutsByText = [];    
+    const serachText = req.query.serachedText;
+    Workout.getAllWorkouts((err, workoutsList) => {
+        if (err) {
+            res.json({ success: false, msg: 'Failed to list all workouts' });
+        } else {
+            workoutsList.forEach(element => {
+                if(element.workoutInDetails){
+                    element.workoutInDetails.forEach(subElement => {
+                        if(subElement.name.indexOf(serachText) > -1){
+                            allWorkoutNames.push(subElement.name); 
+                        }                          
+                    });  
+                }                
+            });
+            res.json({ success: true, allWorkoutNames: allWorkoutNames });
+        }
+    });
+};

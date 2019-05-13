@@ -36,3 +36,6 @@ module.exports.addNewWorkout = function(newWorkout, callback) {
 module.exports.addManyWorkouts = function(newWorkouts, callback){
     Workouts.create(newWorkouts, callback);
 }
+module.exports.getAllWorkouts = function(callback) {
+    Workouts.find({}, callback);
+}

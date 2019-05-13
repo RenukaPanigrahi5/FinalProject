@@ -46,10 +46,16 @@
                             </v-card>
                         </v-tab-item>
                     </v-tabs>                   
-                </div>             
+                </div> 
+                           
             </div>
+            <h1>Auto TextBox</h1>
+            <v-select :options="['Vue.js','React']">
+            </v-select> 
         </div>
+        
     </div>
+    
 </template>
 
 <script>
@@ -63,7 +69,8 @@ export default {
             workouts: [],
             active: null,
             text: '',
-            workoutCategory: ''
+            workoutCategory: '',
+            options: []
             }      
  },
  created(){
@@ -127,5 +134,9 @@ export default {
             width:700px;
             align-content: center;
             border: 0in;            
+}
+h1 {
+  font-size: 26px;
+  font-weight: 600;
 }
 </style>

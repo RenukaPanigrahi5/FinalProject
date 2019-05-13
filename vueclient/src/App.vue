@@ -9,16 +9,18 @@
 <script>
 import Vue from 'vue'
 import facebookLogin from 'facebook-login-vuejs';
-import Navbar from './components/Navbar'
+import Navbar from './components/Navbar';
+import vSelect from 'vue-select';
+
 
 export default {
   name: 'App',
   components: {
      facebookLogin, 
-     'Navbar': Navbar
+     'Navbar': Navbar,
+    'vSelect': 'vue-select'
   }
-  
-}
+  }
 </script>
 <style>
 .fitnessDiv {

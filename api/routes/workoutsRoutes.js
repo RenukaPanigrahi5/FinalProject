@@ -8,5 +8,5 @@ router.get('/getWorkoutCategory', workoutController.getWorkoutByCategory);
 
 router.post('/addWorkoutCategoryToUser', workoutAndUserController.addWorkoutCategoryToUser);
 router.get('/getWorkoutCategoryOfUser', workoutAndUserController.getWorkoutCategoryOfUser);
-
+router.get('/getAllworkoutsBySearchedText', workoutController.listWorkoutsByText);
 module.exports = router;
