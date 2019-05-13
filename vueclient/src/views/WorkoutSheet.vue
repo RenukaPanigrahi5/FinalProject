@@ -46,16 +46,15 @@
                             </v-card>
                         </v-tab-item>
                     </v-tabs>                   
-                </div> 
-                           
+                </div>             
             </div>
-            <h1>Auto TextBox</h1>
-            <v-select :options="['Vue.js','React']">
-            </v-select> 
+            
+            <div id="serachWorkout">
+                    <h1>Auto TextBox</h1>
+                    <v-select :options="options" @search="onSearch"></v-select>                   
+            </div>
         </div>
-        
     </div>
-    
 </template>
 
 <script>
@@ -66,11 +65,11 @@ import EventBus from '../components/EventBus'
 export default {
   data: function() {    
         return{
-            workouts: [],
-            active: null,
-            text: '',
-            workoutCategory: '',
-            options: []
+                workouts: [],
+                active: null,
+                text: '',
+                workoutCategory: '',
+                options: []
             }      
  },
  created(){
@@ -121,6 +120,19 @@ export default {
                 return "Obesity" 
             }
         }        
+      },
+      onSearch(serachedText){
+            const url = this.$BASE_URL+'workout/getAllworkoutsBySearchedText?serachedText='+serachedText;
+        
+            const headers= {"content-type": "application/json"}  
+            axios.get(url, headers).then(res => {
+                
+                if(res.data.allWorkoutNames){
+                        this.options = res.data.allWorkoutNames;            
+                }
+            }).catch(err => {
+                this.$toaster.error('not able to fetch data from server.'+err)
+            })
       }
     }
 
@@ -135,8 +147,26 @@ export default {
             align-content: center;
             border: 0in;            
 }
+
+body {
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+  text-rendering: optimizelegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -moz-text-size-adjust: none;
+}
+
+h1,.muted {
+  color: #2c3e5099;
+}
+
 h1 {
   font-size: 26px;
   font-weight: 600;
 }
+
+#serachWorkout {
+  max-width: 30em;
+  margin: 1em auto;
+}
+
 </style>

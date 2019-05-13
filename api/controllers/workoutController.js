@@ -50,7 +50,7 @@ exports.addNewWorkout = function (req, res) {
 exports.listWorkoutsByText = function (req, res) {
     var allWorkoutNames = [];
     var selectedWorkoutsByText = [];    
-    const serachText = req.query.serachedText;
+    const searchText = req.query.serachedText;
     Workout.getAllWorkouts((err, workoutsList) => {
         if (err) {
             res.json({ success: false, msg: 'Failed to list all workouts' });
@@ -58,7 +58,7 @@ exports.listWorkoutsByText = function (req, res) {
             workoutsList.forEach(element => {
                 if(element.workoutInDetails){
                     element.workoutInDetails.forEach(subElement => {
-                        if(subElement.name.indexOf(serachText) > -1){
+                        if(subElement.name.indexOf(searchText) > -1){
                             allWorkoutNames.push(subElement.name); 
                         }                          
                     });  
