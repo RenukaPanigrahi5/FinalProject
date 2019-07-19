@@ -16,7 +16,6 @@ module.exports.register = (req, res, next) => {
     user.weight = req.body.weight;
     user.height = req.body.height;
     user.username = req.body.username;
-    console.log("Gender"+req.body.gender);
     user.gender = req.body.gender;
     user.save((err, doc) => {
         
@@ -59,3 +58,17 @@ module.exports.userProfile = (req, res, next) =>{
     }
     );
 }
+
+module.exports.listAllUsers = function (req, res) {
+    User.find({}, (err, user) => {
+        if (err) {
+           res.json({ success: false, msg: 'Failed to listAll users' });
+        } else {
+            
+           res.json(user); 
+        }
+    });
+};
+module.exports.getAllUsers = function (callback) {
+    User.find({}, callback);
+  }

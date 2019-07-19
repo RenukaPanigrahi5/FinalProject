@@ -9,3 +9,6 @@ export class User {
     gender: String;
     address: String;
 }
+
+
+

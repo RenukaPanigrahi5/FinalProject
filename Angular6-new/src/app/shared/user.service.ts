@@ -3,6 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
 import { User } from './user.model';
+//import { UserProfile } from './user.profile.model';
+//import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +41,8 @@ export class UserService {
     return this.http.get(environment.apiBaseUrl + '/userProfile');
   }
 
+  
+
 
   //Helper Methods
 
@@ -70,4 +75,10 @@ export class UserService {
     else
       return false;
   }
+
+getAllUsersList(): Observable<User[]> {
+  //console.log("user"+Observable<User[]>);
+  return this.http.get<User[]>(environment.apiBaseUrl + '/listOfUsers');
+}
+
 }
