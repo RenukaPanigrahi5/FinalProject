@@ -8,8 +8,8 @@ import { UserComponent } from './user/user.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
 import { MaterialModule } from "./material/material.module";
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
-import {Sort} from '@angular/material/sort';
+import { MatTableModule } from '@angular/material';
+
 //routes
 import {appRoutes} from './routes';
 
@@ -23,6 +23,7 @@ import { DataTableComponent } from './data-table/data-table.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserProfileComponent } from './userProfiles/user-profile/user-profile.component';
 import { UsersListComponent } from './userProfiles/users-list/users-list.component';
+import {MatSortModule} from '@angular/material/sort';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +34,8 @@ import { UsersListComponent } from './userProfiles/users-list/users-list.compone
     NavbarComponent,
     DataTableComponent,
     UsersListComponent
+    
+    
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,10 @@ import { UsersListComponent } from './userProfiles/users-list/users-list.compone
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSortModule,
+    MatTableModule
+    
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

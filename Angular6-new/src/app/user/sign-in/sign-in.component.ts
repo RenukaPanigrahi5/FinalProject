@@ -20,19 +20,13 @@ export class SignInComponent implements OnInit {
   emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   serverErrorMessages: string;
   ngOnInit() {
-    console.log("before login");
     if(this.userService.isLoggedIn())
-    alert("not calling");
     this.router.navigateByUrl('/userprofile');
   }
 
   onSubmit(form : NgForm){
-    alert("Hello Alert");
-
-    alert("Hai");
     this.userService.login(form.value).subscribe(
       res => {
-        console.log("token in the response"+res['token']);
         this.userService.setToken(res['token']);
         this.router.navigateByUrl('/userprofile');
       },

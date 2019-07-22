@@ -51,9 +51,7 @@ module.exports.userProfile = (req, res, next) =>{
                 return res.status(404).json({ status: false, message: 'User record not found.' });
             else
             {
-            console.log("Gender"+user.gender);
-              
-            return res.status(200).json({ status: true, user : user});
+              return res.status(200).json({ status: true, user : user});
             }
     }
     );
@@ -64,11 +62,7 @@ module.exports.listAllUsers = function (req, res) {
         if (err) {
            res.json({ success: false, msg: 'Failed to listAll users' });
         } else {
-            
-           res.json(user); 
+            res.json(user); 
         }
     });
 };
-module.exports.getAllUsers = function (callback) {
-    User.find({}, callback);
-  }
