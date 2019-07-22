@@ -19,8 +19,8 @@ export class UsersListComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   dataSource;
-  
   displayedColumns = ['fullName', 'username','email','address'];
+  searchKey: string;
   
   constructor(private userService: UserService){}
 ngOnInit(){
@@ -31,8 +31,23 @@ ngOnInit(){
     this.dataSource = new MatTableDataSource(results);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-  })
+    this.dataSource.filterPredicate = (data, filter) => {
+      return this.displayedColumns.some(ele => {
+        return ele !='actions' && data[ele].toLowerCase().indexOf(filter) != -1;
+
+      });
+    };
+  });
   
+}
+
+onSearchClear(){
+  this.searchKey = "";
+  this.applyFilter();
+}
+
+applyFilter(){
+  this.dataSource.filter = this.searchKey.trim().toLowerCase();
 }
   
 }
